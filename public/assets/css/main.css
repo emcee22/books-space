@@ -1,0 +1,38 @@
+body {
+	padding: 1rem;
+}
+
+.loading {
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 300px;
+}
+
+.loading span {
+	height: 0;
+	width: 0;
+	padding: 15px;
+	border: 6px solid #ccc;
+	border-right-color: #888;
+	border-radius: 22px;
+	-webkit-animation: rotate 1s infinite linear;
+}
+
+@-webkit-keyframes rotate {
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+.no-results {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	height: 300px;
+}
+
+.book-carousel-container {
+	padding-top: 2rem;
+}

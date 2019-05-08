@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Book space</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="./assets/css/main.css" />
+	</head>
+	<body>
+		<!-- display the search bar -->
+		<speech-search></speech-search>
+
+		<!-- display relative time -->
+		<relative-time></relative-time>
+
+		<!-- display the books carousel -->
+		<div class="book-carousel-container">
+			<books-carousel hidden></books-carousel>
+		</div>
+
+		<!-- loader -->
+		<div class="loading text-center">
+			<span></span>
+		</div>
+
+		<!-- no-results -->
+		<div class="no-results">No results</div>
+
+		<!-- load the main file -->
+		<script type="module" src="./main.js"></script>
+	</body>
+</html>

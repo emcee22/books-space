@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"sourceMap": true,
+		"removeComments": true,
+		"strictNullChecks": false,
+		"target": "es6",
+		"strict": true,
+		"watch": true,
+		"outDir": "public"
+	},
+	"exclude": ["node_modules", "public"]
+}
