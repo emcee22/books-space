@@ -4,8 +4,8 @@
 	"description": "Search awesome books. Simple project created with Simple Components and Typescript on FE with the help of a simple Express server.",
 	"main": "index.js",
 	"scripts": {
-		"build": "",
-		"watch": "tsc",
+		"build": "tsc",
+		"watch": "tsc --watch",
 		"start": "node server"
 	},
 	"author": "Paul Harbuz",
