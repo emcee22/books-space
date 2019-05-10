@@ -24,9 +24,7 @@ export const styles = `
   
 .slider ul li {
 	position: relative;
-	display: flex;
-	align-items: center;
-    justify-content: center;
+	text-align: center;
 	margin: 10px;
 	padding: 0;
 	min-width: 250px;
@@ -36,9 +34,28 @@ export const styles = `
 	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
 }
 
+.slider ul li div {
+	position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 .slider ul li img {
-	max-height: 100%;
+	max-height: calc(100% - 50px);
 	max-width: 100%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -55%);
+}
+
+.slider ul li h6 {
+	font-size: 1rem;
+	margin: 0;
+}
+
+.slider ul li p {
+	margin: 0;
 }
 
 a.control_prev, a.control_next {

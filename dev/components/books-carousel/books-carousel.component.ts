@@ -65,9 +65,29 @@ export class BooksCarousel extends HTMLElement {
 		this._slider.innerHTML = '';
 		this._slides.forEach((slide, index) => {
 			let listItem = document.createElement('li');
+
+			// book cover
 			let image = document.createElement('img');
 			image.setAttribute('data-src', slide.cover[this.imageType]);
+
+			// author
+			let meta = document.createElement('div');
+			let author = document.createElement('h6');
+			author.innerHTML =
+				slide.authors && slide.authors[0] ? slide.authors[0].name : '-';
+
+			// title
+			let title = document.createElement('p');
+			title.innerHTML = slide.title;
+
+			// add image
 			listItem.appendChild(image);
+
+			// add meta data (author and title)
+			meta.appendChild(author);
+			meta.appendChild(title);
+			listItem.appendChild(meta);
+
 			this._slider.appendChild(listItem);
 		});
 		this.removeAttribute('hidden');
@@ -104,12 +124,16 @@ export class BooksCarousel extends HTMLElement {
 			);
 
 		// autoplay slider
-		this.animationInterval = setInterval(() => {
-			this.moveRight();
-		}, this.autoplayInterval);
+		this.setAnimationInterval();
 
 		// intersection observer that will load images lazy
 		this.lazyLoadImages();
+	}
+
+	setAnimationInterval() {
+		this.animationInterval = setInterval(() => {
+			this.moveRight();
+		}, this.autoplayInterval);
 	}
 
 	moveLeft(event: any = null) {
@@ -189,6 +213,8 @@ export class BooksCarousel extends HTMLElement {
 				// if document is hidden don't stop the loop animation
 				if (this._document.hidden) {
 					clearInterval(this.animationInterval);
+				} else {
+					this.setAnimationInterval();
 				}
 			};
 			// Handle page visibility change

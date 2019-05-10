@@ -42,6 +42,7 @@ export class RelativeTime extends HTMLElement {
 
 	displayElapsedTime() {
 		var loadingTimeDate = new Date();
+		this.textHolderEl.innerHTML = this.rtf.format(0, 'seconds');
 		this.interval = setInterval(() => {
 			var nowDate = new Date();
 			var difference = Math.floor(
