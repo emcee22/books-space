@@ -11,6 +11,8 @@ export const styles = `
 	position: relative;
 	overflow: hidden;
 	max-height: 300px;
+	width: 100%;
+	min-width: 100%;
 }
 
 .slider ul {
@@ -27,7 +29,6 @@ export const styles = `
 	text-align: center;
 	margin: 10px;
 	padding: 0;
-	min-width: 250px;
 	height: 280px;
 	max-height: 280px;
 	border-radius: 5px;
@@ -88,17 +89,5 @@ a.control_prev {
 a.control_next {
 	right: 0;
 	border-radius: 2px 0 0 2px;
-}
-
-@media only screen and (min-width: 1000px)  {
-	.slider {
-		max-height: 400px;
-	}
-
-	.slider ul li {
-		min-width: 300px;
-		height: 380px;
-		max-height: 380px;
-	}
 }
 `;

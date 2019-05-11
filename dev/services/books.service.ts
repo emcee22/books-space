@@ -28,7 +28,7 @@ export class BooksService {
 		).then(response => response.json());
 	}
 
-	filterBooksWithCovers(books: any) {
+	getOnlyBooksWithCovers(books: any) {
 		const arrayBooks = Object.keys(books)
 			.map(key => books[key])
 			.filter(book => book.cover);

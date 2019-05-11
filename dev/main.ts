@@ -19,7 +19,7 @@ const booksCarouselEl = _document.querySelector('books-carousel');
 const relativeTimeEl = _document.querySelector('relative-time');
 
 // this will be called when we fill the input with some values
-speechSearchEl.callback = (text: string) => {
+speechSearchEl.callback = async (text: string) => {
 	if (!text) {
 		return;
 	}
@@ -36,35 +36,36 @@ speechSearchEl.callback = (text: string) => {
 	// reset the relative time
 	relativeTimeEl.reset = true;
 
-	// make API call so we display the books
+	// initialize the books service
 	const bookService = new BooksService();
-	bookService.searchBooks(text).then(rsp => {
-		// gather all isbn list from the list
-		const isbnList: string[] = [];
-		rsp.docs.forEach((doc: any) => {
-			if (doc.isbn) {
-				isbnList.push(doc.isbn[0]);
-			}
-		});
 
-		// request all the books
-		bookService.getBooks(isbnList).then(rsp => {
-			// filter out books that don't have covers
-			const onlyBooksWithCovers = bookService.filterBooksWithCovers(rsp);
-			bookService.books = onlyBooksWithCovers;
+	// search for the books
+	const foundBooks = await bookService.searchBooks(text);
 
-			// send data to the carousel
-			if (bookService.books.length) {
-				booksCarouselEl.removeAttribute('hidden');
-				booksCarouselEl.slides = bookService.books;
-			} else {
-				_document.querySelector('.no-results').style.display = 'flex';
-			}
-
-			// hide loading text
-			_document.querySelector('.loading').style.display = 'none';
-		});
+	// gather all isbn list from the list
+	const isbnList: string[] = [];
+	foundBooks.docs.forEach((doc: any) => {
+		if (doc.isbn) {
+			isbnList.push(doc.isbn[0]);
+		}
 	});
+
+	// get actual books data by provided isbn list
+	const foundBooksDetails = await bookService.getBooks(isbnList);
+
+	// hide loading
+	_document.querySelector('.loading').style.display = 'none';
+
+	// filter out books that don't have covers
+	bookService.books = bookService.getOnlyBooksWithCovers(foundBooksDetails);
+
+	// send data to the carousel
+	if (bookService.books.length) {
+		booksCarouselEl.removeAttribute('hidden');
+		booksCarouselEl.slides = bookService.books;
+	} else {
+		_document.querySelector('.no-results').style.display = 'flex';
+	}
 };
 
 // set a default value
