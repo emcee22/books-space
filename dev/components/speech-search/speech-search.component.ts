@@ -49,7 +49,7 @@ export class SpeechSearch extends HTMLElement {
 		return this._inputvalue;
 	}
 
-	set inputvalue(value) {
+	set inputvalue(value: string) {
 		this._inputvalue = value;
 		this._shadowRoot.querySelector('input').value = this._inputvalue;
 		this._callback(this._inputvalue);

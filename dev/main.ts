@@ -44,7 +44,7 @@ speechSearchEl.callback = async (text: string) => {
 
 	// gather all isbn list from the list
 	const isbnList: string[] = [];
-	foundBooks.docs.forEach((doc: any) => {
+	foundBooks.docs.forEach(doc => {
 		if (doc.isbn) {
 			isbnList.push(doc.isbn[0]);
 		}

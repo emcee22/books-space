@@ -1,17 +1,25 @@
+// import interfaces
+import { ISearch } from '../interfaces/search.interface';
+import { IBooks } from '../interfaces/books.interface';
+import { IBooksValue } from '../interfaces/books.interface';
+
 export class BooksService {
-	_books: any[] = [];
+	_books: IBooksValue[] = [];
 
 	constructor() {}
 
-	get books(): any[] {
+	get books(): IBooksValue[] {
 		return this._books;
 	}
 
-	set books(books: any[]) {
+	set books(books: IBooksValue[]) {
 		this._books = books;
 	}
 
-	searchBooks(query: string = 'the lord of the rings', page: number = 1) {
+	searchBooks(
+		query: string = 'the lord of the rings',
+		page: number = 1
+	): Promise<ISearch> {
 		const transformedQuery = query
 			.toLowerCase()
 			.split(' ')
@@ -21,14 +29,14 @@ export class BooksService {
 		).then(response => response.json());
 	}
 
-	getBooks(isbnList: string[]) {
+	getBooks(isbnList: string[]): Promise<IBooks> {
 		const transformedIsbn = isbnList.join(',ISBN:');
 		return fetch(
 			`https://openlibrary.org/api/books?bibkeys=ISBN:${transformedIsbn}&jscmd=data&format=json`
 		).then(response => response.json());
 	}
 
-	getOnlyBooksWithCovers(books: any) {
+	getOnlyBooksWithCovers(books: IBooks) {
 		const arrayBooks = Object.keys(books)
 			.map(key => books[key])
 			.filter(book => book.cover);

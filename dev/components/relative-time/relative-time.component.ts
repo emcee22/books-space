@@ -9,7 +9,7 @@ export class RelativeTime extends HTMLElement {
 	_shadowRoot: ShadowRoot;
 	textHolderEl: HTMLElement;
 	language: string = 'en';
-	interval: any;
+	interval: number;
 	rtf: any;
 
 	_reset: boolean = false;
@@ -34,7 +34,7 @@ export class RelativeTime extends HTMLElement {
 		return this._reset;
 	}
 
-	set reset(value) {
+	set reset(value: boolean) {
 		this._reset = value;
 		clearInterval(this.interval);
 		this.displayElapsedTime();

@@ -1,3 +1,6 @@
+// import interfaces
+import { IBooksValue } from '../../interfaces/books.interface';
+
 import { styles } from './books-carousel.css.js';
 import { htmlTemplate } from './books-carousel.template.js';
 
@@ -13,14 +16,13 @@ export class BooksCarousel extends HTMLElement {
 	_nextLink: HTMLElement;
 	_slider: any;
 	_sliderContainer: any;
-	_slides: any[] = [];
+	_slides: IBooksValue[] = [];
 
 	// slider configuration
 	slideWidth: number = 0;
 	animationDuration: number = 500;
 	animationInterval: number; // holds the interval so we can clearInterval
 	autoplayInterval: number = 3000;
-	imageType: string = 'medium'; // property that is updated based upon screen width
 	minimumSlideWidth: number = 150;
 	maximumSlideWidth: number = 250;
 	preferredSlidesPerPage: number = 6;
@@ -39,7 +41,7 @@ export class BooksCarousel extends HTMLElement {
 		return this._slides;
 	}
 
-	set slides(slides) {
+	set slides(slides: IBooksValue[]) {
 		this._slides = slides;
 		this.createSlides();
 		this.slideInit();
@@ -67,7 +69,7 @@ export class BooksCarousel extends HTMLElement {
 
 			// book cover
 			let image = document.createElement('img');
-			image.setAttribute('data-src', slide.cover[this.imageType]);
+			image.setAttribute('data-src', slide.cover['medium']);
 
 			// author
 			let meta = document.createElement('div');
