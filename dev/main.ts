@@ -73,9 +73,6 @@ speechSearchEl.addEventListener(
 	}
 );
 
-// this will be called when we fill the input with some values
-speechSearchEl.callback = async (text: string) => {};
-
 // set a default value
 speechSearchEl.inputvalue = 'Javascript';
 
