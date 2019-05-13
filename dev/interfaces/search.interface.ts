@@ -1,7 +1,7 @@
 interface IDocs {
-	isbn: string[];
+    isbn: string[];
 }
 
 export interface ISearch {
-	docs: IDocs[];
+    docs: IDocs[];
 }

@@ -1,29 +1,29 @@
 interface IPublishers {
-	name: string;
+    name: string;
 }
 
 interface IAuthors {
-	url: string;
-	name: string;
+    url: string;
+    name: string;
 }
 
 interface ICover {
-	large: string;
-	medium: string;
-	small: string;
+    large: string;
+    medium: string;
+    small: string;
 }
 
 export interface IBooksValue {
-	authors: IAuthors[];
-	key: string;
-	publish_date: string;
-	publishers: IPublishers[];
-	subtitle: string;
-	title: string;
-	url: string;
-	cover: ICover;
+    authors: IAuthors[];
+    key: string;
+    publish_date: string;
+    publishers: IPublishers[];
+    subtitle: string;
+    title: string;
+    url: string;
+    cover: ICover;
 }
 
 export interface IBooks {
-	[propName: string]: IBooksValue;
+    [propName: string]: IBooksValue;
 }

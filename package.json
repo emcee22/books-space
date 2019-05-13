@@ -1,27 +1,35 @@
 {
-	"name": "book-space",
-	"version": "0.0.1",
-	"description": "Search awesome books. Simple project created with Simple Components and Typescript on FE with the help of a simple Express server.",
-	"main": "index.js",
-	"scripts": {
-		"build": "tsc && copyfiles -e dev/**/*.ts -u 1 dev/**/*.** public",
-		"watch": "npm-watch",
-		"start": "npm run build && node server"
-	},
-	"watch": {
-		"build": {
-			"patterns": [
-				"dev/*"
-			],
-			"extensions": "ts,js,html,css,md"
-		}
-	},
-	"author": "Paul Harbuz",
-	"license": "MIT",
-	"devDependencies": {
-		"copyfiles": "^2.1.0",
-		"express": "^4.16.4",
-		"npm-watch": "^0.6.0",
-		"typescript": "^3.4.5"
-	}
+    "name": "book-space",
+    "version": "0.0.1",
+    "description": "Search awesome books. Simple project created with Simple Components and Typescript on FE with the help of a simple Express server.",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc && copyfiles -e dev/**/*.ts -u 1 dev/**/*.** public",
+        "watch": "npm-watch",
+        "start": "npm run build && node server",
+        "test-lint": "eslint dev/**/*.ts"
+    },
+    "watch": {
+        "build": {
+            "patterns": [
+                "dev/*"
+            ],
+            "extensions": "ts,js,html,css,md"
+        }
+    },
+    "author": "Paul Harbuz",
+    "license": "MIT",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^1.9.0",
+        "@typescript-eslint/parser": "^1.9.0",
+        "copyfiles": "^2.1.0",
+        "eslint": "^5.16.0",
+        "eslint-config-prettier": "^4.2.0",
+        "eslint-plugin-import": "^2.17.2",
+        "eslint-plugin-prettier": "^3.1.0",
+        "express": "^4.16.4",
+        "npm-watch": "^0.6.0",
+        "prettier": "^1.17.0",
+        "typescript": "^3.4.5"
+    }
 }
