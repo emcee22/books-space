@@ -4,14 +4,24 @@
 	"description": "Search awesome books. Simple project created with Simple Components and Typescript on FE with the help of a simple Express server.",
 	"main": "index.js",
 	"scripts": {
-		"build": "tsc",
-		"watch": "tsc --watch",
-		"start": "node server"
+		"build": "tsc && copyfiles -e dev/**/*.ts -u 1 dev/**/*.** public",
+		"watch": "npm-watch",
+		"start": "npm run build && node server"
+	},
+	"watch": {
+		"build": {
+			"patterns": [
+				"dev/*"
+			],
+			"extensions": "ts,js,html,css,md"
+		}
 	},
 	"author": "Paul Harbuz",
-	"license": "ISC",
+	"license": "MIT",
 	"devDependencies": {
+		"copyfiles": "^2.1.0",
 		"express": "^4.16.4",
+		"npm-watch": "^0.6.0",
 		"typescript": "^3.4.5"
 	}
 }

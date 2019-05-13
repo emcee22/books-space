@@ -12,12 +12,13 @@ customElements.define('relative-time', RelativeTime);
 // add speech-search custom element
 customElements.define('speech-search', SpeechSearch);
 
-// call back for when we have a value set
+// cache elements
 const _document = <any>document;
 const speechSearchEl = _document.querySelector('speech-search');
 const booksCarouselEl = _document.querySelector('books-carousel');
 const relativeTimeEl = _document.querySelector('relative-time');
 
+// called when typing in the input
 speechSearchEl.addEventListener(
 	'speech-text-updated',
 	async (event: CustomEvent) => {
