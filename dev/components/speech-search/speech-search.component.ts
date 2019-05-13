@@ -3,12 +3,6 @@ import { htmlTemplate } from './speech-search.template.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
-<link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-    crossorigin="anonymous"
-/>
 <style>${styles}</style> ${htmlTemplate}`;
 
 export class SpeechSearch extends HTMLElement {
@@ -27,10 +21,13 @@ export class SpeechSearch extends HTMLElement {
 
 		// set-up speech recognition API
 		this._window.SpeechRecognition =
+			this._window.SpeechRecognition ||
 			this._window.webkitSpeechRecognition ||
-			this._window.SpeechRecognition;
+			this._window.mozSpeechRecognition ||
+			this._window.msSpeechRecognition ||
+			null;
 
-		if ('SpeechRecognition' in window) {
+		if (this._window.SpeechRecognition) {
 			this.recognition = new SpeechRecognition();
 			this.recognition.interimResults = true;
 			this.recognition.maxAlternatives = 10;
@@ -90,7 +87,6 @@ export class SpeechSearch extends HTMLElement {
 
 	onResult(event: any) {
 		this.interimTranscript = '';
-
 		for (
 			let i = event.resultIndex, len = event.results.length;
 			i < len;
@@ -103,7 +99,6 @@ export class SpeechSearch extends HTMLElement {
 				this.interimTranscript += transcript;
 			}
 		}
-
 		this._shadowRoot.querySelector('input').value = this.finalTranscript;
 		this._shadowRoot
 			.querySelector('input')

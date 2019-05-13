@@ -66,37 +66,29 @@ export class BooksCarousel extends HTMLElement {
 		this._slider.innerHTML = '';
 		this._slides.forEach((slide, index) => {
 			let listItem = document.createElement('li');
-
 			// book cover
 			let image = document.createElement('img');
 			image.setAttribute('data-src', slide.cover['medium']);
-
 			// author
 			let meta = document.createElement('div');
 			let author = document.createElement('h6');
 			author.innerHTML =
 				slide.authors && slide.authors[0] ? slide.authors[0].name : '-';
-
 			// title
 			let title = document.createElement('p');
 			title.innerHTML = slide.title;
-
 			// add image
 			listItem.appendChild(image);
-
 			// add meta data (author and title)
 			meta.appendChild(author);
 			meta.appendChild(title);
 			listItem.appendChild(meta);
-
 			this._slider.appendChild(listItem);
 		});
-
 		// move last child to first spot in case we go left
 		this._slider.prepend(
 			this._shadowRoot.querySelector('.slider ul li:last-child')
 		);
-
 		// autoplay slider
 		this.setAnimationInterval();
 		this.removeAttribute('hidden');
@@ -107,7 +99,10 @@ export class BooksCarousel extends HTMLElement {
 		const sliderWidth = this._sliderContainer.offsetWidth;
 
 		// calculate the slide width
-		this.slideWidth = this.getSlideWidth(sliderWidth);
+		this.slideWidth = this.getSlideWidth(
+			sliderWidth,
+			this.preferredSlidesPerPage
+		);
 
 		// set all slide width
 		this._shadowRoot
@@ -131,14 +126,17 @@ export class BooksCarousel extends HTMLElement {
 		this.lazyLoadImages();
 	}
 
-	getSlideWidth(sliderWidth: number): number {
-		const calcSlideWidth = sliderWidth / this.preferredSlidesPerPage;
+	getSlideWidth(sliderWidth: number, preferredSlidesPerPage: number): number {
+		const calcSlideWidth = sliderWidth / preferredSlidesPerPage;
 		if (calcSlideWidth < this.minimumSlideWidth) {
-			this.preferredSlidesPerPage -= 1;
-			return this.getSlideWidth(sliderWidth);
-		} else if (calcSlideWidth > this.maximumSlideWidth) {
-			this.preferredSlidesPerPage += 1;
-			return this.getSlideWidth(sliderWidth);
+			preferredSlidesPerPage -= 1;
+			return this.getSlideWidth(sliderWidth, preferredSlidesPerPage);
+		} else if (
+			calcSlideWidth > this.maximumSlideWidth &&
+			preferredSlidesPerPage > 1
+		) {
+			preferredSlidesPerPage += 1;
+			return this.getSlideWidth(sliderWidth, preferredSlidesPerPage);
 		}
 		return calcSlideWidth;
 	}

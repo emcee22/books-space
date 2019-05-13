@@ -25,9 +25,13 @@ export class RelativeTime extends HTMLElement {
 		// set the language
 		this.language = navigator.language;
 		const intl: any = Intl;
-		this.rtf = new intl.RelativeTimeFormat(
-			this.language.split('-')[0] || 'en'
-		);
+
+		// check browser support
+		if (intl.RelativeTimeFormat) {
+			this.rtf = new intl.RelativeTimeFormat(
+				this.language.split('-')[0] || 'en'
+			);
+		}
 	}
 
 	get reset() {
@@ -37,7 +41,7 @@ export class RelativeTime extends HTMLElement {
 	set reset(value: boolean) {
 		this._reset = value;
 		clearInterval(this.interval);
-		this.displayElapsedTime();
+		if (this.rtf) this.displayElapsedTime();
 	}
 
 	displayElapsedTime() {
