@@ -18,8 +18,8 @@ Browser APIs used:
 
 ## development
 
-For updating run in a separate terminal `tsc` or `npm run watch` and start coding in the `dev` folder.
-All compiled code will be outputted in the public folder.
+For updating the code run in a separate terminal `npm run watch` and start coding in the `dev` folder.
+All compiled code will be outputted in the `public` folder.
 
 ## dependencies
 
