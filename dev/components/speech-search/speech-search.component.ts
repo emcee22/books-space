@@ -18,7 +18,6 @@ export class SpeechSearch extends HTMLElement {
 	finalTranscript: string = '';
 
 	_inputvalue: string = '';
-	_callback: any;
 	_window = <any>window;
 
 	constructor() {
@@ -52,15 +51,13 @@ export class SpeechSearch extends HTMLElement {
 	set inputvalue(value: string) {
 		this._inputvalue = value;
 		this._shadowRoot.querySelector('input').value = this._inputvalue;
-		this._callback(this._inputvalue);
-	}
 
-	get callback() {
-		return this._callback;
-	}
-
-	set callback(value) {
-		this._callback = value;
+		// dispatch event
+		this.dispatchEvent(
+			new CustomEvent('speech-text-updated', {
+				detail: this._inputvalue
+			})
+		);
 	}
 
 	connectedCallback() {
